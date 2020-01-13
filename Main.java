@@ -102,67 +102,99 @@ public class Main {
 			System.out.println();
 		}
 	}
-	
-		private static void login() {
+	private static void login() {
 		Scanner input = new Scanner(System.in);
 		String set_username = "admin";
-	    String set_password = "admin";
-	    String username = null;
-	    String password = null;
-	    while (!set_username.equals(username)) {
-	    	System.out.println("Εισάγετε username:");
-	    	username = input.next();
-	    	if (!set_username.equals(username)) {
-	    		System.out.println("Λάθος username.");
-	    	   	username = input.nextLine();
+	        String set_password = "admin";
+	        String username = null;
+	        String password = null;
+	        while (!set_username.equals(username)) {
+	    		System.out.println("Εισάγετε username:");
+	    		username = input.next();
+	    		if (!set_username.equals(username)) {
+	    			System.out.println("Λάθος username.");
+	    	   		username = input.nextLine();
+	    		}
 	    	}
-	    }
-	    while (!set_password.equals(password)) {
+	    	while (!set_password.equals(password)) {
 			System.out.println("Εισάγετε password:");
 			password = input.next();
 			if (!set_password.equals(password)) {
 			    System.out.println("Λάθος password.");
 			    password = input.nextLine();
 			}
-	    }
-	    System.out.println("Επιτυχής σύνδεση.");
+	    	}
+	    	System.out.println("Επιτυχής σύνδεση.");
 	}
-	
 	private static void loadObjects() {
-		//Έσοδα ξενοδοχείου για το έτος 2018
-		Income i1_2018 = new Income("Έσοδα από δωμάτια", 985392.30);
-		Income i2_2018 = new Income("Έσοδα από bar", 252426.60);
-		Income i3_2018 = new Income("Λοιπά έσοδα", 100765.40);
+		//Έσοδα ξενοδοχείου για το περσινό έτος
+		Income i1 = new Income("Έσοδα από δωμάτια", 985392.30);
+		Income i2 = new Income("Έσοδα από bar", 252426.60);
+		Income i3 = new Income("Λοιπά έσοδα", 100765.40);
 
-		//Έξοδα ξενοδοχείου για το έτος 2018
-		Outcome o1_2018 = new Outcome("Έξοδα μισθοδοσίας", 176268.25);
-		Outcome o2_2018 = new Outcome("Έξοδα συντήρησης ξενοδοχείου", 103245.80);
-		Outcome o3_2018 = new Outcome("Λοιπά έξοδα", 732953.60);
+		//Έξοδα ξενοδοχείου για το περσινό έτος
+		Outcome o1 = new Outcome("Έξοδα μισθοδοσίας", 176268.25);
+		Outcome o2 = new Outcome("Έξοδα συντήρησης ξενοδοχείου", 103245.80);
+		Outcome o3 = new Outcome("Λοιπά έξοδα", 732953.60);
 
-		//Λίστα οικονομικών στοιχείων για το έτος 2018
-		ArrayList<Double> year_2018 = new ArrayList<Double>();
-		year_2018.add(i1_2018.getValue());
-		year_2018.add(i2_2018.getValue());
-		year_2018.add(i3_2018.getValue());
-		year_2018.add(o1_2018.getValue());
-		year_2018.add(o2_2018.getValue());
-		year_2018.add(o3_2018.getValue());
-		calculateProfit(year_2018);
+		//Λίστα οικονομικών στοιχείων για το περσινό έτος και ο οικονομικά ενδιαφερόμενος εισάγει στοιχεία φετινού έτους
+		ArrayList<Double> lastyear = new ArrayList<Double>();
+		lastyear.add(i1.getValue());
+		lastyear.add(i2.getValue());
+		lastyear.add(i3.getValue());
+		lastyear.add(o1.getValue());
+		lastyear.add(o2.getValue());
+		lastyear.add(o3.getValue());
+		calculateProfit(lastyear);
+		Scanner input = new Scanner(System.in);
+		System.out.println("Παρακαλώ εισάγετε τα έσοδα απο δωμάτια για το φετινός έτος.");
+		Income i11 = new Income("Έσοδα από δωμάτια", input.nextDouble());
+		System.out.println("Παρακαλώ εισάγετε τα έσοδα απο bar για το φετινός έτος.");
+		Income i21 = new Income("Έσοδα από bar", input.nextDouble());
+		System.out.println("Παρακαλώ εισάγετε λοιπά έσοδα για το φετινός έτος.");
+		Income i31 = new Income("Λοιπά έσοδα", input.nextDouble());
+		System.out.println("Παρακαλώ εισάγετε τα έξοδα μισθοδοσίας για το φετινός έτος.");
+		Outcome o11 = new Outcome("Έξοδα μισθοδοσίας", input.nextDouble());
+		System.out.println("Παρακαλώ εισάγετε τα έξοδα συντήρησης ξενοδοχείου για το φετινός έτος.");
+		Outcome o21 = new Outcome("Έξοδα συντήρησης ξενοδοχείου", input.nextDouble());
+		System.out.println("Παρακαλώ εισάγετε λοιπά έξοδα για το φετινός έτος.");
+		Outcome o31 = new Outcome("Λοιπά έξοδα", input.nextDouble());
+		ArrayList<Double> thisyear = new ArrayList<Double>();
+		thisyear.add(i11.getValue());
+		thisyear.add(i21.getValue());
+		thisyear.add(i31.getValue());
+		thisyear.add(o11.getValue());
+		thisyear.add(o21.getValue());
+		thisyear.add(o31.getValue());
+		calculateProfit(lastyear, thisyear);
 	}
-	
 	private static void calculateProfit(ArrayList<Double> list1) {
 		double income = list1.get(0) + list1.get(1) + list1.get(2);
 		double outcome = list1.get(3) + list1.get(4) + list1.get(5);
 		double profit = income - outcome;
 		if (profit < 0) {
-			System.out.printf("Το ξενοδοχείο ζημιώθηκε κατά %.2f %s\n", profit, "ευρώ");
+			System.out.printf("Το ξενοδοχείο ζημιώθηκε κατά %.2f %s\n", profit, "ευρώ πέρσι");
 		} else if (profit == 0) {
-			System.out.println("Το ξενοδοχείο δεν σημείωσε κέρδος");
+			System.out.println("Το ξενοδοχείο δεν σημείωσε κέρδος πέρσι");
 		} else {
-			System.out.printf("Το ξενοδοχείο είχε κέρδος %.2f %s\n", profit, "ευρώ");
+			System.out.printf("Το ξενοδοχείο είχε κέρδος %.2f %s\n", profit, "ευρώ πέρσι");
+		}
+	}
+	private static void calculateProfit(ArrayList<Double> list1, ArrayList<Double> list2) {
+		double incomelastyear = list1.get(0) + list1.get(1) + list1.get(2);
+		double outcomelastyear = list1.get(3) + list1.get(4) + list1.get(5);
+		double profitlastyear = incomelastyear - outcomelastyear;
+		double incomethisyear = list2.get(0) + list2.get(1) + list2.get(2);
+		double outcomethisyear = list2.get(3) + list2.get(4) + list2.get(5);
+		double profitthisyear = incomethisyear - outcomethisyear;
+		double profit = profitthisyear - profitlastyear;
+		if (profit < 0) {
+			System.out.printf("Το ξενοδοχείο ζημιώθηκε κατά %.2f %s\n", profit, "ευρώ σε σχέση με πέρσι");
+		} else if (profit == 0) {
+			System.out.println("Το ξενοδοχείο δεν σημείωσε κέρδος σε σχέση με πέρσι");
+		} else {
+			System.out.printf("Το ξενοδοχείο είχε κέρδος %.2f %s\n", profit, "ευρώ σε σχέση με πέρσι");
 		}
 	}
 }
 
-
-}
