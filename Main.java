@@ -11,50 +11,57 @@ public class Main {
 		//να εμφανιστεί το αρχικό μενού επιλογών
 	}
 
-	public static void setValues() throws FileNotFoundException, UnsupportedEncodingException {
+	public static void setValues() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Παρακαλω πληκτρολογήστε όνομα");
 		String name = sc.nextLine();
 		System.out.println("Παρακαλω πληκτρολογήστε ηλικία");
 		double age = sc.nextDouble();
+		sc.nextLine();
 		System.out.println(
 				"Παρακαλω δηλώστε αν ο υποψήφιος έχει προσκομίσει ιατρική βεβαίωση.\nΑπαντήστε με: 'ναι' ή 'όχι'");
-		String healthy = sc.nextLine();
+	    String healthy = sc.nextLine();
 		healthy.toLowerCase();
 		System.out.println("Παρακαλω πληκτρολογήστε αριθμό προηγούμενων εργασιακών εμπειριών");
 		int jobs = sc.nextInt();
 		System.out.println("Παρακαλω πληκτρολογήστε αν ο υποψήφιος είναι καπνιστής.\nΑπαντήστε με: 'ναι' ή 'όχι'");
 		String smoker = sc.nextLine();
 		smoker.toLowerCase();
-		System.out.println("Παρακαλω πληκτρολογήστε αριθμό ξένων γλωσσών");
-		int languages = sc.nextInt();
+		sc.nextLine();
 		System.out.println("Παρακαλω πληκτρολογήστε αν ο υποψήφιος έχει επισυνάψει φωτογραφία." +
-       "\nΑπαντήστε με: 'ναι' ή 'όχι'");
+       "\nΑπαντήστε με: 'ναι' ή όχι'");
 		String photo = sc.nextLine();
 		photo.toLowerCase();
+		System.out.println("Παρακαλώ πείτε πόσες ξένες γλώσσες γνωρίζει ο υποψήφιος");
+		int languages=sc.nextInt();
 		int[] Jobs1 = new int[jobs];
 		String[]Lang1 = new String[languages];
 		String[]Jobs2 = new String[jobs];
 		String[]Lang2 = new String[languages];
-			for (int j = 0; j < 2; j++) {
-					System.out.println("Παρακαλώ πληκτρολογήστε το είδος της εργασίας νούμερο"+j);
+			for (int j = 0; j < jobs; j++) {
+					System.out.println("Παρακαλώ πληκτρολογήστε το είδος της εργασίας νούμερο "+(j+1)+"Απλές εργασίες," 
+							 +"Reception, Λογιστήριο, Καθαριότητα, Διοικητικό στέλεχος");
 					Jobs2[j] = sc.nextLine();
 			}
+			sc.nextLine();
 					for (int i = 0; i < jobs; i++) {
 				System.out.println(
-						"Παρακαλώ γράψτε για πόσο καιρό έμεινε (σε μήνες) ο υποψήφιος στην εργασία νούμερο:  " + i);
+						"Παρακαλώ γράψτε για πόσο καιρό έμεινε (σε μήνες) ο υποψήφιος στην εργασία νούμερο:  " +(i+1));
 				Jobs1[i] = sc.nextInt();
 			}
 		for (int i = 0; i < languages; i++) {
-			System.out.println("Παρακαλώ γράψτε το όνομα της ξένης γλώσσας νούμερο" + i);
+			System.out.println("Παρακαλώ γράψτε το όνομα της ξένης γλώσσας νούμερο" +(i+1));
 			Lang1[i] = sc.nextLine();
 		}
-			for (int k = 0; k < 2; k++) {
+		sc.nextLine();
+		for (int k = 0; k < languages; k++) {
 				System.out.println("Παρακαλώ γράψτε το επίπεδο ('άριστα' ή 'όχι άριστα')"
-						+ " του υποψήφιου στη γλώσσα νούμερο" + k);
+						+ " του υποψήφιου στη γλώσσα νούμερο" +(k+1));
 				Lang2[k] = sc.nextLine();//υποθέτουμε πως το ξενοδοχείο αναζητεί 
 				//υποψήφιους μόνο με άριστη γνώση ξένων γλωσσών
 			}
+		Hire.grading(name,age, jobs, healthy, smoker, languages, photo,
+				Lang1, Lang2, Jobs1, Jobs2);
 		Employee A = new Employee(name, age, jobs, healthy, smoker, languages, photo, Lang1, Lang2, Jobs1, Jobs2);
 		ArrayList<String> character = new ArrayList<String>();
 		String e = null;
