@@ -3,15 +3,15 @@ import java.util.Scanner;
 
 public class Employee {
 	private static String name;
-	private static double age;
-	private static int jobs;
+	protected static double age;
+	protected static int jobs;
 	private static String healthy;
 	private static String smoker;
-	private static int languages;
+	protected static int languages;
 	private static String photo;
-	private static String[] Lang1 = new String[languages];// περιέχει τα ονόματα των ξένων γλωσσών
+	protected static String[] Lang1 = new String[languages];// περιέχει τα ονόματα των ξένων γλωσσών
 	private static int[] Jobs1 = new int[jobs];//περιέχει χρονικό διάστημα δουλειάς σε μήνες
-	private static String[] Lang2 = new String[languages];// περιέχει επίπεδο ξένης γλώσσας
+	protected static String[] Lang2 = new String[languages];// περιέχει επίπεδο ξένης γλώσσας
 	private static String[] Jobs2 = new String[jobs];//περιέχει είδος δουλειάς
 
 	public static void setName(String name) {
@@ -94,7 +94,7 @@ public class Employee {
 		Jobs1 = jobs1;
 	}
 
-	public int[] getJobs1() {
+	public static int[] getJobs1() {
 		return Jobs1;
 	}
 
@@ -114,4 +114,5 @@ public Employee(String name, double age, int jobs, String healthy, String smoker
 
 	}
 }
+
 
