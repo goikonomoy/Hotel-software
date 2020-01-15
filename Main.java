@@ -168,7 +168,7 @@ public class Main {
 		double outcome = list1.get(3) + list1.get(4) + list1.get(5);
 		double profit = income - outcome;
 		if (profit < 0) {
-			System.out.printf("Το ξενοδοχείο ζημιώθηκε κατά %.2f %s\n", profit, "ευρώ πέρσι");
+			System.out.printf("Το ξενοδοχείο ζημιώθηκε κατά %.2f %s\n", -profit, "ευρώ πέρσι");
 		} else if (profit == 0) {
 			System.out.println("Το ξενοδοχείο δεν σημείωσε κέρδος πέρσι");
 		} else {
@@ -184,7 +184,7 @@ public class Main {
 		double profitthisyear = incomethisyear - outcomethisyear;
 		double profit = profitthisyear - profitlastyear;
 		if (profit < 0) {
-			System.out.printf("Το ξενοδοχείο ζημιώθηκε κατά %.2f %s\n", profit, "ευρώ σε σχέση με πέρσι");
+			System.out.printf("Το ξενοδοχείο ζημιώθηκε κατά %.2f %s\n", -profit, "ευρώ σε σχέση με πέρσι");
 		} else if (profit == 0) {
 			System.out.println("Το ξενοδοχείο δεν σημείωσε κέρδος σε σχέση με πέρσι");
 		} else {
