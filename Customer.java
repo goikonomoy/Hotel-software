@@ -5,17 +5,44 @@ public class Customer {
 	private String email;
 	private String name;
 	private int id;
+	private int count = 0;
 	private String surname;
 	private String sex;
-	ArrayList<Customer> customers = new ArrayList<Customer>() ;
-	ArrayList<CompletedReservation> creservations = new ArrayList<CompletedReservation>() ;
+	public static ArrayList<Customer> customers = new ArrayList<Customer>() ;
+	public ArrayList<CompletedReservation> creservations = new ArrayList<CompletedReservation>() ;
 
 	public Customer( String name, String surname, String email, String address,int age, String sex) {
+		id = count;
 		this.setAddress(address);
 		this.setName(name);
 		this.setEmail(email);
 		this.setSurname(surname);
+		this.setSex(sex);
 		customers.add(this);
+		count++;
+	}
+	private void setSex(String sex) {
+		this.sex = sex;
+		
+	}
+	public static Customer findCustomer(String name,String surname) {
+		int i;
+		String X=name;
+		String Y=surname;
+		int id=0;
+		Customer cur = null;
+		for(i = 0; i < customers.size(); i++) {
+			Customer cu = customers.get(i);
+			X = cu.getName();
+			Y = cu.getSurname();
+			
+			if (name==X && surname == Y) {
+				System.out.print("Υπάρχει ο πελάτης");
+				break;
+			}
+		}
+		return cur;
+		
 	}
 
 	//καθορίζει την κατηγορία του πελάτη ανάλογα με τις μέρες διαμονής//
@@ -23,7 +50,8 @@ public class Customer {
 		int i;
 		int NoOfStays = 0;
 		for (i = 0; i < creservations.size(); i++) {
-			NoOfStays += Reservation.nightsStayed(creservations.get(i));
+			Reservation r = creservations.get(i);
+			NoOfStays += r.nightsStayed(creservations.get(i));
 		}
 		String customerCat;
 		if (NoOfStays <= 8) {
@@ -84,6 +112,11 @@ public class Customer {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getSurname() {
+		
+		return surname;
 	}
 
 

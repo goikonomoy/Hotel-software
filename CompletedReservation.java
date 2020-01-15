@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -8,8 +9,8 @@ public class CompletedReservation extends Reservation {
  private double Value;
  public static ArrayList<CompletedReservation> creservations;
  
-	public CompletedReservation(LocalDate check_in, LocalDate check_out, Room room, String Cname, int Cid, double value) {
-		super(check_in, check_out, room, Cname, Cid);
+	public CompletedReservation(LocalDate check_in, LocalDate check_out, int roomNo, String Cname, int Cid, double value) {
+		super(check_in, check_out, roomNo, Cname, Cid);
 		Questionnaire Q = new Questionnaire(Cid);
 		Value = value;
 		creservations.add(this);

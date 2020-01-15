@@ -3,44 +3,45 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Room {
-	private String Cat;
+	private int Cat;
 	private int RoomNo;
 	public double Price;
-	ArrayList<Room> rooms = new ArrayList<Room>();
-	public Room(String Cat, int RoomNo) {
+	static ArrayList<Room> rooms = new ArrayList<Room>();
+	public Room(int Cat, int RoomNo) {
 		this.setCat(Cat);
 		this.setRoomNo(RoomNo);
 		Price = CatPrice(Cat);
 		rooms.add(this);
 	}
-	private double CatPrice(String cat2) {
+	private double CatPrice(int cat) {
 		double price = 0;
-		switch (cat2) {
-			case  "1-bed" :
+		switch (cat) {
+			case  1 :
 				price = 30;
 				break;
-			case "2-bed" :
+			case 2 :
 				price = 50;
 				break;
-			case "3-bed" :
+			case 3 :
 				price = 65;
 				break;
-			case "4-bed" :
+			case 4 :
 				price = 87.5;
 				break;
-			case "suite" :
+			case 5 :
 				price = 100;
 				break;
 		}
 		return price;
 	}
-	public String getCat() {
+	public int getCat() {
 		return Cat;
 	}
 	//εξετάζει τη διαθεσιμότητα για δοσμένες ημερομηνίες και τύπο δωματίου και επιστρέφει (τυχαία για παραπάνω από 1 διαθέσιμα) ένα αντικείμενο δωματίου που πληροί τα κριτήρια
-	public Room roomAvailability(String Cat, LocalDate check_in, LocalDate check_out){
+	public static Room roomAvailability(int Cat, LocalDate check_in, LocalDate check_out){
 		int i;
 		ArrayList<Room> roomsAvailable = rooms;
+		if (false == (Reservation.reservations.isEmpty())) {
         for (i = 0; i < Reservation.reservations.size(); i++) {
         	Reservation r = Reservation.reservations.get(i);
         	if (((r.getCheck_in().compareTo(check_in) >= 0) && (r.getCheck_out().compareTo(check_out) <= 0)) || 
@@ -50,6 +51,7 @@ public class Room {
         			 roomsAvailable.remove(r.getRoom());
         	}
         }
+		}
         for (i = 0; i < roomsAvailable.size(); i++) {
         	Room ro = roomsAvailable.get(i);
         	if (ro.Cat != Cat) {
@@ -75,7 +77,7 @@ public class Room {
 	return HotelFullness;
 		
 	}
-	public void setCat(String cat) {
+	public void setCat(int cat) {
 		Cat = cat;
 	}
 	public int getRoomNo() {
