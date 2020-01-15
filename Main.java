@@ -1,4 +1,10 @@
 import java.util.Scanner;
+
+import java.util.InputMismatchException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -94,7 +100,9 @@ public class Main {
 			login(); //φορτώνεται η φόρμα σύνδεσης του οικονομικά ενδιαφερόμενου ατόμου
 			loadObjects();
 		case 3:
-			System.out.println();
+
+			main3();
+
 		}
 	}
 	private static void login() {
@@ -191,5 +199,196 @@ public class Main {
 			System.out.printf("Το ξενοδοχείο είχε κέρδος %.2f %s\n", profit, "ευρώ σε σχέση με πέρσι");
 		}
 	}
+
+
+
+	private static final String String = null;
+
+	public static void main3() {
+		loadObjects2();
+		boolean obj = loadObjects2();
+		Scanner sc = new Scanner(System.in);
+		if (obj == false) {
+		int p = 0 ;
+		boolean loop ;
+		do {
+			 loop = true;
+			do {
+				try {
+					System.out.println("Γειά σας έχετε κάνει κάποια κράτηση;/n press 1 for yes or 2 for no");
+					p=sc.nextInt();
+					if (p<1||p>2) {
+						System.out.println("Παρακαλώ πατήστε 1 ή 2");
+					}
+					loop = false;
+				} catch (InputMismatchException ex) {
+					System.err.println("exception" + ex);
+					sc.hasNextLine();
+					System.out.println("Παρακαλω δωστε εναν ακεραιο 1 ή 2");
+				}
+			}while(loop);
+		}while(p < 1 || p >2);
+			if  (p==2) {
+			int kind_room = 0;
+			do {
+				 loop = true;
+				do {
+					try {
+						System.out.println("Τι είδους δωματίου ψάχνετε;\n Υπάρχουν μονόκλινα,δύκλινα,τρίκλινα,τετράκλινα,suite \n πληκτρολογήστε 1,2,3,4,5 για το είδους δωματίου που προτιμάτε αντίστοιχα\n");
+						kind_room=sc.nextInt();
+						if (kind_room<1||kind_room>5) {
+							System.out.println("Παρακαλώ πατήστε 1 ή 2 ή 3 ή 4 ή 5");
+						}
+						loop = false;
+					} catch (InputMismatchException ex) {
+						System.err.println("exception" + ex);
+						sc.hasNextLine();
+						System.out.println("Παρακαλω δωστε εναν ακεραιο 1 ή 2 ή 3 ή 4 ή 5");
+					}
+				}while(loop);
+			}while(kind_room < 1 || kind_room >5);
+			
+			String input;
+			System.out.println("Δώστε μηνα,ημέρα,χρόνο άφιξης πχ 10/25/2019");
+		    input = sc.next();
+		    LocalDate chekin = dateInput(input);
+		    System.out.println("Δώστε μήνα,ημέρα,χρόνο αναχώρισης πχ 1/31/2019");
+			input = sc.next();
+			LocalDate chekout = dateInput(input);
+			Room r = Room.roomAvailability(kind_room, chekin,  chekout);
+			int q = 0;
+			do {
+				 loop = true;
+				do {
+					try {
+						System.out.println("Είναι η πρώτη φορά που έρχεστε στο ξενοδοχείο;/n 1 για Nαι και 2 για Oχι");
+						q=sc.nextInt();
+						if (q<1||q>2) {
+							System.out.println("Παρακαλώ πατήστε 1 ή 2");
+						}
+						loop = false;
+					} catch (InputMismatchException ex) {
+						System.err.println("exception" + ex);
+						sc.hasNextLine();
+						System.out.println("Παρακαλω δωστε εναν ακεραιο 1 ή 2");
+					}
+				}while(loop);
+			}while(q < 1 || q >2);
+			
+			if (q==1) {
+				System.out.println("Όνομα");
+			    String name;
+				name=sc.next();
+				System.out.println("Επίθετο");
+				String surname;
+				surname = sc.next();
+				System.out.println("Email");
+				String email;
+				email=sc.next();
+				System.out.println("Διεύθυνση");
+				String address;
+				address = sc.next();
+				int age = 0;
+				do {
+					 loop = true;
+					do {
+						try {
+							System.out.println("Ηλικία");
+							age=sc.nextInt();
+							if (age<18) {
+								System.out.println("Παρακαλώ δωστε σωστή ηλικία");
+							}
+							loop = false;
+						} catch (InputMismatchException ex) {
+							System.err.println("exception" + ex);
+							sc.hasNextLine();
+							System.out.println("δωστε την ηλικία σας");
+						}
+					}while(loop);
+				}while(age<18);
+				
+				String sex="";
+					do { 
+					System.out.println("please and your sex.M for male and F for female");
+					sex=sc.next();
+					}while (sex == "M" || sex=="F");
+				System.out.println("please enter your id");
+				int id;
+				id=sc.nextInt();
+			    new Customer(name, surname, email, address, age, sex);
+			}
+			
+				
+			}else 
+				System.out.println("Δωστε μας το ονομα σας και το επιθετό σας για να μπορέσουμε να βρουμε τα στοιχεία σας");
+			String nam = sc.next();
+			String surnam = sc.next();
+			Customer cu = Customer.findCustomer(nam,surnam);
+			if(cu == null) {
+				System.out.println("Δεν υπάρχει αυτός ο πελάτης");
+				
+				
+			} else {
+			System.out.println("Δωστε μασ τον κωδικό κρατησης");
+			Scanner sc1 = new Scanner(System.in);
+			int connumber = sc1.nextInt();
+			Reservation.rFinder(connumber);
+			
+		}
+		}else {
+			System.out.println("FAILED TO LOAD OBJECTS PROPERLY");
+		}
+	sc.close();
+	}
+	
+	
+	public static LocalDate dateInput(String userInput) {
+
+	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("M/d/yyyy");
+	    LocalDate date = LocalDate.parse(userInput, dateFormat);
+	    return date ;
+	}
+	public static boolean loadObjects2() {
+		boolean obj = false;
+		new Room(1, 101);
+		new Room(1, 102);
+		new Room(1, 103);
+		new Room(1, 104);
+		new Room(1, 105);
+		new Room(2, 201);
+		new Room(2, 202);
+		new Room(2, 203);
+		new Room(2, 204);
+		new Room(2, 205);
+		new Room(3, 301);
+		new Room(3, 302);
+		new Room(3, 303);
+		new Room(3, 304);
+		new Room(3, 305);
+		new Room(3, 401);
+		new Room(4, 402);
+		new Room(4, 403);
+		new Room(4, 404);
+		new Room(4, 405);
+		new Room(5, 1001);
+		new Room(5, 1002);
+		new Room(5, 1003);
+		new Customer("panagiotis","spiliotis","panspil1111@gmail.com","stravonos 14", 18,"M");
+		new Customer("giannhs","vagionakis","gvagion@gmail.com","ieronos 14", 23,"M");
+		new Customer("manolis","papakostantinoy","manolis13@gmail.com","derbenakioy 18", 38,"M");
+		new Customer("artemis","patedaki","artemis@hotmail.com","agiou nikolaoy 5", 32,"F");
+		new Customer("elina","saranti","elinam@gmail.com","diovoyniotoy 12", 28,"F");
+		new Customer("giorgos","oikonomoy","goikonom@gmail.com","panepistimioy 56", 22,"M");
+		new Customer("mhxalhs","papantonioy","makispap@gmail.com","kolokotronh 14", 26,"M");
+		//new Reservation(dateInput("9/2/2019"),dateInput("9/16/2019"),1002,"giannhs",2);
+		//new Reservation(dateInput("9/15/2019"),dateInput("9/30/2019"),1001,"panagiotis",3);
+		//new Reservation(dateInput("9/13/2019"),dateInput("9/17/2019"),201,"artemis",5);
+		obj = ((Customer.customers.isEmpty()) && (Room.rooms.isEmpty()));
+		return obj;
+	}
+	
 }
 
+
+
+}

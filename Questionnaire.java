@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Questionnaire {
-public Questionnaire(Reservation reservation, int[] answers) {
-	
+public int[] answers=new int[11];
+private Reservation reservation;
+int CustomerId;
+public ArrayList<Questionnaire> Questionnaires = new ArrayList<Questionnaire>();
+public Questionnaire(int CustomerId) {
+	this.CustomerId = CustomerId;
+	answers = run_que();
+	Questionnaires.add(this);
 	}
-public static int[] answers=new int[10];
-public static char[] que = new char[10];
+public static String[] que = new String[10];{
 que[0]="How did you find the hotel?";
 que[1]="How clean the hotel was?";
 que[2]="How good was the service in the restaurant?";
@@ -17,13 +22,24 @@ que[7]="Are you happy adout the price of the hotel";
 que[8]="Would you visit the hotel again?";
 que[9]="Would recommend the hotel to a friend or acquaintance";
 }
-}
-public static void run_que(char[]que) {
-	Scanner sc = new Scanner(System.in);
-	for(int x=0; x=9; x++) {
+//τρέχει το ερωτηματολόγιο και αποθηκέυει τις απαντήσεις (σε κλίμακα 1-3) στις πρώτες 10 θέσεις του πίνακα ansers, ενώ στην 
+//τελευταία εκχωρείται η συνολική βαθμολογία (αστέρια, κλίμακα 0-5)
+public int[] run_que(){
+	int sum = 0;
+	int x;
+	for( x=0; x<10; x++) {
 	System.out.println(que[x]);
 	System.out.println("press a number from one to three and then enter:1=bad , 2=average , 3=good");
-	answers[x]=sc.nextInt();
+	Scanner sc = new Scanner(System.in);
+	answers[x] = sc.nextInt();
+	sum += (answers[x]-1);
+	sc.close();
+	
 	}
+	answers[10] = (sum/4);
+	return answers;
 }
+
 }
+
+
