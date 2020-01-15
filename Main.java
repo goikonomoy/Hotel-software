@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -99,8 +100,9 @@ public class Main {
 			login(); //φορτώνεται η φόρμα σύνδεσης του οικονομικά ενδιαφερόμενου ατόμου
 			loadObjects();
 		case 3:
+
 			main3();
-			System.out.println();
+
 		}
 	}
 	private static void login() {
@@ -197,6 +199,7 @@ public class Main {
 			System.out.printf("Το ξενοδοχείο είχε κέρδος %.2f %s\n", profit, "ευρώ σε σχέση με πέρσι");
 		}
 	}
+
 
 
 	private static final String String = null;
@@ -388,3 +391,4 @@ public class Main {
 
 
 
+}
